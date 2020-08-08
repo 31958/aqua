@@ -1,13 +1,16 @@
-Aims: 为位置不定的商人提供宣传的服务，同时为用户提供附近可以使用的服务（买卖和人际交往）
-
-Sources of satisfaction: 迅速得到附近的人的服务、帮助；吸引周围的人参观自己，获得瞩目
+Aims: 为位置不定的商人提供宣传的服务，同时为用户提供附近可以使用的服务（买卖和人际交往），邻近社区的人获得更多的交往；
+      迅速得到附近的人的服务、帮助；吸引周围的人参观自己/自己举办的活动，获得瞩目；
 
 Knowledge and skills: 用户需掌握核心的获取/提供服务的操作
 
-group attributes：邻近社区的人获得更多的交往，他们之间产生更多贸易。他们的常驻地点相同且不变化
+group attributes：
 
 Nature of activities：用户一目了然的获得服务信息（尤位置）；近距离
 
-Functional requirements：为移动商贩显示位置（固定的当然也可）
+Functional requirements：商贩/用户/某个活动可以显示位置；
+                         聊天、人们可以在二维地图上互动；
+                         记录你身边经过的人的名字，可以添加他们为好友；
+                         搜索附近有什么服务，搜索你想要的服务在哪里；
+                         查看附近的人/好友在什么位置，他们发布的动态；
 
-Non functional requirements：要考虑手机使用力低的人
+Non functional requirements：要考虑手机使用力低的人；地图要有趣；
