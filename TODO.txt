@@ -2,3 +2,5 @@ Research PHP & Websockets to add chat function
 Decide a logo in mipmaps: project\Implementation\app\src\main\res 
 Zendesk API??
 Allow group debug app on phone & emulator
+Add functionalities to support the training of paimapiers
+Find out if this is feasible: https://blog.csdn.net/luozhuang/article/details/8678380
