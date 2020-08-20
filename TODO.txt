@@ -1,0 +1,4 @@
+Research PHP & Websockets to add chat function
+Decide a logo in mipmaps: project\Implementation\app\src\main\res 
+Zendesk API??
+Allow group debug app on phone & emulator
