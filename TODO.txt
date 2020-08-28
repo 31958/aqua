@@ -4,3 +4,5 @@ Zendesk API??
 Allow group debug app on phone & emulator
 Add functionalities to support the training of paimapiers
 Find out if this is feasible: https://blog.csdn.net/luozhuang/article/details/8678380
+
+User role based interface - e.g. admin gives you more buttons
