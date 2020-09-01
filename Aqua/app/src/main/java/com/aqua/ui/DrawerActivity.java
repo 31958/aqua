@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 
 import com.aqua.R;
+import com.aqua.ui.login.LoginActivity;
 import com.aqua.ui.settings.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,7 +32,7 @@ public class DrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        final Intent intent = new Intent(this, SettingsActivity.class);
+        final Intent intent = new Intent(this, LoginActivity.class);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
