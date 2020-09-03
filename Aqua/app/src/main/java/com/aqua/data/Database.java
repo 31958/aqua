@@ -1,5 +1,8 @@
 package com.aqua.data;
 
+import com.aqua.ui.DrawerActivity;
+import com.aqua.ui.login.LoginActivity;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,7 +12,7 @@ public class Database {
     private static Connection conn = null;
 
     public static void connect(String username, String password) throws SQLException {
-        String url = "jdbc:mysql://n1plcpnl0042.prod.ams1.secureserver.net:3306";
+        String url = "jdbc:mysql://n1plcpnl0042.prod.ams1.secureserver.net/aquadb";
         // db parameters
         // create a connection to the database
         conn = DriverManager.getConnection(url, username, password);
@@ -32,7 +35,7 @@ public class Database {
             Statement stmt = conn.createStatement();
 
             String sql = "INSERT INTO test " +
-                    "VALUES ('Zara', 'Ali', '"+ message+"')";
+                    "VALUES ('Sender', 'Receiver', '"+ message+"')";
             stmt.executeUpdate(sql);
         }catch(SQLException e){
             System.out.println(e.getMessage());

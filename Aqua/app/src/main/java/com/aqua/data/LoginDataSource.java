@@ -1,5 +1,8 @@
 package com.aqua.data;
 
+import android.os.Build;
+import android.provider.ContactsContract;
+
 import com.aqua.data.model.LoggedInUser;
 
 import java.io.IOException;
@@ -15,12 +18,13 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
         try {
             Database.connect(username, password);
+            Database.sendMessage("login successful");
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(), username);
             return new Result.Success<>(fakeUser);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
+        } catch (SQLException e) {
+            return new Result.Error(new SQLException("SQL Error", e));
         }
     }
 
