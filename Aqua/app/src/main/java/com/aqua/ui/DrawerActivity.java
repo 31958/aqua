@@ -72,4 +72,10 @@ public class DrawerActivity extends AppCompatActivity {
     public void message(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    public void Moment(View view) {
+        Intent intentMoment = new Intent(this, MomentActivity.class);
+        startActivity(intentMoment);
+    }
+
 }
