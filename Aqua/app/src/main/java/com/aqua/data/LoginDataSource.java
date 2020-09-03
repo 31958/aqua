@@ -13,28 +13,8 @@ import java.sql.SQLException;
 public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
-        Connection conn = null;
-        String url = "jdbc:mysql://n1plcpnl0042.prod.ams1.secureserver.net:3306";
         try {
-            try {
-            // db parameters
-
-
-            // create a connection to the database
-            conn = DriverManager.getConnection(url, username, password);
-            System.out.println("successful");
-            // more processing here
-            // ...
-            } catch(SQLException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                try{
-                    if(conn != null)
-                        conn.close();
-                }catch(SQLException ex){
-                    System.out.println(ex.getMessage());
-                }
-            }
+            Database.connect(username, password);
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(), username);
@@ -44,7 +24,7 @@ public class LoginDataSource {
         }
     }
 
-    public void logout() {
-        // TODO: revoke authentication
+    public void logout(){
+        Database.disconnect();
     }
 }
