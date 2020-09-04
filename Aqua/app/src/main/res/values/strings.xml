@@ -38,7 +38,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_drawer">MainActivity</string>
+    <string name="title_activity_drawer">Aqua</string>
     <string name="share_your_feeling">Share your feeling</string>
     <string name="send_feeling">Send</string>
 </resources>

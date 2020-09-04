@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.aqua.R;
+import com.aqua.ui.chat.ChatActivity;
 import com.aqua.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -32,7 +33,7 @@ public class DrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        final Intent intent = new Intent(this, LoginActivity.class);
+        final Intent intent = new Intent(this, ChatActivity.class);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
