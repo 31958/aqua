@@ -1,4 +1,4 @@
-package com.aqua.ui;
+package com.aqua.ui.post;
 
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;

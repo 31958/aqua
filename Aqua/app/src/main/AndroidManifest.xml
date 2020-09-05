@@ -12,11 +12,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.AddNewActivity"
-                  android:parentActivityName=".ui.MomentActivity">
+        <activity android:name=".ui.post.AddNewActivity"
+                  android:parentActivityName=".ui.post.MomentActivity">
         </activity>
         <activity
-                android:name=".ui.MomentActivity"
+                android:name=".ui.post.MomentActivity"
                 android:parentActivityName=".ui.DrawerActivity">
         </activity>
         <activity
