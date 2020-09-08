@@ -2,8 +2,8 @@ package com.aqua.ui.chat;
 
 import com.aqua.R;
 
-import com.aqua.data.Database;
 import com.aqua.data.Message;
+import com.aqua.data.SendMessageTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ChatActivity extends AppCompatActivity
 {
@@ -29,19 +33,31 @@ public class ChatActivity extends AppCompatActivity
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendMessage();
+                SendMessage(textbox.getText().toString());
             }
         });
     }
 
-    private void SendMessage()
+    private void SendMessage(String message)
     {
-        String message_content = textbox.getText().toString();
+        Message msg = new Message();
+        msg.ID = "0";
+        msg.from_ID = "0";
+        msg.to_ID = "1";
+        msg.message = message;
+        msg.dateTime = "19:17 08/09/2020";
 
-        Message message = new Message();
+        SendMessageTask sendMessageTask = new SendMessageTask();
+        sendMessageTask.setMessage(msg);
+        try {
+            sendMessageTask.setUrl(new URL("http://elitegateinternational.co.uk/message.php"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        sendMessageTask.execute();
+    }
 
-        Database.sendMessage(message_content);
-
-        textbox.setText(null);
+    public void showPopup(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

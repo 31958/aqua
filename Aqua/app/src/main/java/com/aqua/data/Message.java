@@ -1,8 +1,9 @@
 package com.aqua.data;
 
 public class Message {
-    private int ID;
-    private int from_ID;
-    private int to_ID;
-    private String message;
+    public String ID;
+    public String from_ID;
+    public String to_ID;
+    public String message;
+    public String dateTime;
 }
