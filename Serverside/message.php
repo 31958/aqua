@@ -10,7 +10,7 @@ include 'config.php' ;
  $message = $_POST['message'];
  $dateTime = $_POST['dateTime'];
 
- $sql = "insert into 'Messages' (messageID,senderID,receiverID,message,dateTime) values ('$messageID','$senderID','$receiverID','$message','$dateTime')";
+ $sql = "INSERT INTO Messages (messageID, senderID, receiverID, message, dateTime) VALUES ('$messageID','$senderID','$receiverID','$message','$dateTime')";
  
  if(mysqli_query($con,$sql)){
  

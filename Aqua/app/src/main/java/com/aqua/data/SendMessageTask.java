@@ -3,14 +3,14 @@ package com.aqua.data;
 import android.os.AsyncTask;
 
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -30,57 +30,50 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-
-
-            Map<String,String> msg= new HashMap<>();
-            msg.put("messageID",message.ID);
-            msg.put("senderID",message.from_ID);
-            msg.put("receiverID",message.to_ID);
-            msg.put("message",message.message);
-            msg.put("dateTime",message.dateTime);
-
-            String[] data = {
-                    this.message.ID,
-                    this.message.from_ID,
-                    this.message.to_ID,
-                    this.message.message,
-                    this.message.dateTime
-            };
-
-            OutputStream out = null;
-
+            HttpURLConnection con = null;
             try {
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-                con.setRequestMethod("POST");
-
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
-
-                writer.write(getPostDataString(msg));
-
-                writer.flush();
-                writer.close();
-                out.close();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-
-                String json;
-                while ((json = reader.readLine()) != null) {
-                    sb.append(json + "\n");
-                }
-
-                System.out.println("JSON");
-                System.out.println(json);
-                System.out.println("JSON");
-
-                con.connect();
-
-            } catch (Exception e){
+                con = (HttpURLConnection) this.url.openConnection();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+            try {
+                con.setRequestMethod("POST");
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            }
+            con.setDoOutput(true);
 
-            System.out.println("post requested");
+            Map<String,String> msg= new HashMap<>();
+            msg.put("messageID","0");
+            msg.put("senderID","0");
+            msg.put("receiverID","1");
+            msg.put("message",this.message.message);
+            msg.put("dateTime","20:47 08/09/2020");
+
+            con.setRequestProperty("Content-Type", "application/json");
+
+            try(OutputStream os = con.getOutputStream()){
+                System.out.println(getPostDataString(msg));
+                os.write(getPostDataString(msg).getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream s = null;
+            try {
+                s = con.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                System.out.println(s.read());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return "Data Inserted Successfully";
         }
 
