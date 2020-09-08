@@ -1,6 +1,9 @@
 package com.aqua.data;
 
 import android.os.AsyncTask;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -15,6 +18,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class SendMessageTask extends AsyncTask<String, Void, String> {
         private Message message;
@@ -28,67 +32,41 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
             this.url = url;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected String doInBackground(String... params) {
-            HttpURLConnection con = null;
-            try {
-                con = (HttpURLConnection) this.url.openConnection();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
+            try{
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("POST");
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            }
-            con.setDoOutput(true);
+                con.setDoOutput(true);
 
-            Map<String,String> msg= new HashMap<>();
-            msg.put("messageID","0");
-            msg.put("senderID","0");
-            msg.put("receiverID","1");
-            msg.put("message",this.message.message);
-            msg.put("dateTime","20:47 08/09/2020");
+                int random_int = (int)(Math.random() * (10000 + 1));
 
-            con.setRequestProperty("Content-Type", "application/json");
+                Map<String,String> msg= new HashMap<>();
+                msg.put("messageID",String.valueOf(random_int));
+                msg.put("senderID","0");
+                msg.put("receiverID","1");
+                msg.put("message",this.message.message);
+                msg.put("dateTime","20:47 08/09/2020");
 
-            try(OutputStream os = con.getOutputStream()){
-                System.out.println(getPostDataString(msg));
-                os.write(getPostDataString(msg).getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
+                StringJoiner sj = new StringJoiner("&");
+                for(Map.Entry<String,String> entry : msg.entrySet())
+                    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                            + URLEncoder.encode(entry.getValue(), "UTF-8"));
+
+                byte[] out = sj.toString().getBytes();
+                int length = out.length;
+
+                con.setFixedLengthStreamingMode(length);
+                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 con.connect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            InputStream s = null;
-            try {
-                s = con.getInputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                System.out.println(s.read());
-            } catch (IOException e) {
+                try(OutputStream os = con.getOutputStream()){
+                    os.write(out);
+                }
+                InputStream s = con.getInputStream();
+            }catch(Exception e){
                 e.printStackTrace();
             }
             return "Data Inserted Successfully";
         }
-
-    private String getPostDataString(Map<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first)
-                first = false;
-            else
-                result.append("&");
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-        return result.toString();
-    }
 }
