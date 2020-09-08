@@ -13,7 +13,4 @@ public class NewPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
     }
 
-    public void sendFeeling(View view) {
-
-    }
 }

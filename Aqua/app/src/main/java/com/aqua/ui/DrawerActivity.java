@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +55,16 @@ public class DrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        final Button postsButton = findViewById(R.id.postsButton);
+        postsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fp=new Intent(DrawerActivity.this,PostsActivity.class);
+                startActivity(fp);
+            }
+        });
     }
 
     @Override
@@ -74,9 +85,5 @@ public class DrawerActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    public void Moment(View view) {
-        Intent intentMoment = new Intent(this, PostsActivity.class);
-        startActivity(intentMoment);
-    }
 
 }
