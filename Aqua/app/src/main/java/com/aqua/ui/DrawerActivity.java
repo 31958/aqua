@@ -16,7 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.aqua.R;
 import com.aqua.ui.chat.ChatActivity;
-import com.aqua.ui.post.MomentActivity;
+import com.aqua.ui.post.PostsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -75,7 +75,7 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     public void Moment(View view) {
-        Intent intentMoment = new Intent(this, MomentActivity.class);
+        Intent intentMoment = new Intent(this, PostsActivity.class);
         startActivity(intentMoment);
     }
 

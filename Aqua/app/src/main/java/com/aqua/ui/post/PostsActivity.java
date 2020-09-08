@@ -5,18 +5,17 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.aqua.R;
-import com.aqua.ui.post.AddNewActivity;
 
-public class MomentActivity extends AppCompatActivity {
+public class PostsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_moment);
+        setContentView(R.layout.activity_posts);
     }
 
     public void addNew(View view) {
-        Intent intentAdd = new Intent(this, AddNewActivity.class);
+        Intent intentAdd = new Intent(this, NewPostActivity.class);
         startActivity(intentAdd);
     }
 
