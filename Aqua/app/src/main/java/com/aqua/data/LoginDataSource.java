@@ -16,19 +16,15 @@ import java.sql.SQLException;
 public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
-        try {
-            Database.connect(username, password);
-            Database.sendMessage("login successful");
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(), username);
-            return new Result.Success<>(fakeUser);
-        } catch (SQLException e) {
-            return new Result.Error(new SQLException("SQL Error", e));
-        }
+        //Database.connect(username, password);
+        //Database.sendMessage("login successful");
+        LoggedInUser fakeUser =
+                new LoggedInUser(
+                        java.util.UUID.randomUUID().toString(), username);
+        return new Result.Success<>(fakeUser);
     }
 
     public void logout(){
-        Database.disconnect();
+        //Database.disconnect();
     }
 }

@@ -41,4 +41,6 @@
     <string name="title_activity_drawer">Aqua</string>
     <string name="share_your_feeling">Share your feeling</string>
     <string name="send_feeling">Send</string>
+    <string name="posts_button">Posts</string>
+    <string name="new_post_button">New post</string>
 </resources>
