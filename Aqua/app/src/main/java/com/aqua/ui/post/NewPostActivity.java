@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.aqua.R;
+import com.aqua.data.Post;
 
 public class NewPostActivity extends AppCompatActivity {
 
@@ -28,10 +29,14 @@ public class NewPostActivity extends AppCompatActivity {
 
                 String postText = postEdit.getText().toString(); //Get txt
 
+                Post post = new Post();
+                post.ID = "1";
+                post.author_ID = "1";
+                post.content = "Look, my father just died.";
+                post.dateTime = "yesterday";
+                post.location = "Wuhan";
 
 
-
-                postEdit.setText(null);
             }
         });
 
