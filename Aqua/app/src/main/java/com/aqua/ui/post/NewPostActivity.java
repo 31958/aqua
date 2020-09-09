@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.aqua.R;
-import com.aqua.data.Database;
 
 public class NewPostActivity extends AppCompatActivity {
 
