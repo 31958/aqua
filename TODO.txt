@@ -1,8 +1,3 @@
-Research PHP & Websockets to add chat function
-Decide a logo in mipmaps: project\Implementation\app\src\main\res 
-Zendesk API??
-Allow group debug app on phone & emulator
-Add functionalities to support the training of paimapiers
-Find out if this is feasible: https://blog.csdn.net/luozhuang/article/details/8678380
-
-User role based interface - e.g. admin gives you more buttons
+wps' wireframe
+all do coding
+https://www.sitepoint.com/creating-a-php-oauth-server/#:~:text=%20As%20described%20during%20the%20introduction%20to%20a,is%20returned%20and%20the%20test%20file...%20More%20
