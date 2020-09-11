@@ -5,8 +5,10 @@ import com.aqua.R;
 import com.aqua.data.Message;
 import com.aqua.data.SendMessageTask;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ public class ChatActivity extends AppCompatActivity
 {
     private ImageButton sendButton;
     private EditText textbox;
+    private int receiverID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,21 +34,19 @@ public class ChatActivity extends AppCompatActivity
         textbox = findViewById(R.id.textbox);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                SendMessage(textbox.getText().toString());
+                sendMessage(textbox.getText().toString());
             }
         });
     }
 
-    private void SendMessage(String message)
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void sendMessage(String message)
     {
         Message msg = new Message();
-        msg.ID = "0";
-        msg.from_ID = "0";
-        msg.to_ID = "1";
-        msg.message = message;
-        msg.dateTime = "19:17 08/09/2020";
+        msg.compose(message,this.receiverID);
 
         SendMessageTask sendMessageTask = new SendMessageTask();
         sendMessageTask.setMessage(msg);
@@ -55,6 +56,14 @@ public class ChatActivity extends AppCompatActivity
             e.printStackTrace();
         }
         sendMessageTask.execute();
+    }
+
+    public void setReceiverID(int receiverID) {
+        this.receiverID = receiverID;
+    }
+
+    private void displayMessages(){
+
     }
 
     public void showPopup(String message){

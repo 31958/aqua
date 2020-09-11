@@ -5,15 +5,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -40,14 +34,12 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
                 con.setRequestMethod("POST");
                 con.setDoOutput(true);
 
-                int random_int = (int)(Math.random() * (10000 + 1));
-
                 Map<String,String> msg= new HashMap<>();
-                msg.put("messageID",String.valueOf(random_int));
-                msg.put("senderID","0");
-                msg.put("receiverID","1");
-                msg.put("message",this.message.message);
-                msg.put("dateTime","20:47 08/09/2020");
+                msg.put("messageID",String.valueOf(this.message.getID()));
+                msg.put("senderID",String.valueOf(this.message.getSenderID()));
+                msg.put("receiverID",String.valueOf(this.message.getReceiverID()));
+                msg.put("message",this.message.getMessage());
+                msg.put("dateTime",this.message.getDateTime().toString());
 
                 StringJoiner sj = new StringJoiner("&");
                 for(Map.Entry<String,String> entry : msg.entrySet())
@@ -62,6 +54,7 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
                 con.connect();
                 try(OutputStream os = con.getOutputStream()){
                     os.write(out);
+                    // handle delivery errors returned from server here
                 }
                 InputStream s = con.getInputStream();
             }catch(Exception e){
