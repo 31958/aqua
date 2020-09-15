@@ -6,8 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.aqua.GlobalVariables;
 import com.aqua.R;
 import com.aqua.data.Post;
+import com.aqua.data.PostTask;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class NewPostActivity extends AppCompatActivity {
 
@@ -28,18 +33,25 @@ public class NewPostActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String postText = postEdit.getText().toString(); //Get txt
-
-                Post post = new Post();
-                post.ID = "1";
-                post.author_ID = "1";
-                post.content = "Look, my father just died.";
-                post.dateTime = "yesterday";
-                post.location = "Wuhan";
-
+                sendPost(postText);
 
             }
         });
 
     }
 
+    private void sendPost(String postText) {
+        Post post = new Post(postText);
+
+        PostTask postTask = new PostTask();
+        postTask.setPost(post);
+
+        try {
+            //TODO: change variable
+            postTask.setUrl(new URL(GlobalVariables.message));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        postTask.execute();
+    }
 }
