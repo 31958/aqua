@@ -4,7 +4,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -31,7 +32,15 @@ public class PostRequest {
             try(OutputStream os = con.getOutputStream()){
                 os.write(out);
             }
-            return con.getResponseMessage();
+            StringBuilder sb = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                sb.append(line);
+                sb.append("\n");
+            }
+            return sb.toString();
         }catch(Exception e){
             e.printStackTrace();
         }
