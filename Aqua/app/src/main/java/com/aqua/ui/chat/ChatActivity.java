@@ -1,5 +1,6 @@
 package com.aqua.ui.chat;
 
+import com.aqua.GlobalVariables;
 import com.aqua.R;
 
 import com.aqua.data.Message;
@@ -51,7 +52,7 @@ public class ChatActivity extends AppCompatActivity
         SendMessageTask sendMessageTask = new SendMessageTask();
         sendMessageTask.setMessage(msg);
         try {
-            sendMessageTask.setUrl(new URL("http://elitegateinternational.co.uk/message.php"));
+            sendMessageTask.setUrl(new URL(GlobalVariables.message));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

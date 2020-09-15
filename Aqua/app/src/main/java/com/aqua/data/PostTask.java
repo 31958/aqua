@@ -46,7 +46,7 @@ public class PostTask extends AsyncTask<String, Void, String> {
             msg.put("messageID",String.valueOf(random_int));
             msg.put("senderID","0");
             msg.put("receiverID","1");
-            msg.put("message",this.message.message);
+            msg.put("message",this.message.getMessage());
             msg.put("dateTime","20:47 08/09/2020");
 
             StringJoiner sj = new StringJoiner("&");

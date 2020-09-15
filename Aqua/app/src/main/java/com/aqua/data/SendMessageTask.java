@@ -29,37 +29,17 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected String doInBackground(String... params) {
-            try{
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("POST");
-                con.setDoOutput(true);
+            Map<String,String> msg= new HashMap<>();
+            msg.put("messageID",String.valueOf(this.message.getID()));
+            msg.put("senderID",String.valueOf(this.message.getSenderID()));
+            msg.put("receiverID",String.valueOf(this.message.getReceiverID()));
+            msg.put("message",this.message.getMessage());
+            msg.put("dateTime",this.message.getDateTime().toString());
 
-                Map<String,String> msg= new HashMap<>();
-                msg.put("messageID",String.valueOf(this.message.getID()));
-                msg.put("senderID",String.valueOf(this.message.getSenderID()));
-                msg.put("receiverID",String.valueOf(this.message.getReceiverID()));
-                msg.put("message",this.message.getMessage());
-                msg.put("dateTime",this.message.getDateTime().toString());
+            String response = PostRequest.Post(this.url, msg);
 
-                StringJoiner sj = new StringJoiner("&");
-                for(Map.Entry<String,String> entry : msg.entrySet())
-                    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                            + URLEncoder.encode(entry.getValue(), "UTF-8"));
-
-                byte[] out = sj.toString().getBytes();
-                int length = out.length;
-
-                con.setFixedLengthStreamingMode(length);
-                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                con.connect();
-                try(OutputStream os = con.getOutputStream()){
-                    os.write(out);
-                    // handle delivery errors returned from server here
-                }
-                InputStream s = con.getInputStream();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return "Data Inserted Successfully";
+            //TODO: delete this
+            System.out.println(response);
+            return "";
         }
 }

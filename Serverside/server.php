@@ -1,8 +1,8 @@
 <?php
 
-$dsn      = 'mysql:dbname=my_oauth2_db;host=localhost';
-$username = 'root';
-$password = '';
+$dsn      = 'mysql:dbname=aquadb;host=n1plcpnl0042.prod.ams1.secureserver.net';
+$username = 'admin';
+$password = 'password';
 
 // error reporting (this is a demo, after all!)
 ini_set('display_errors',1);error_reporting(E_ALL);
