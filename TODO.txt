@@ -1,3 +1,0 @@
-wps' wireframe
-all do coding
-https://bshaffer.github.io/oauth2-server-php-docs/
