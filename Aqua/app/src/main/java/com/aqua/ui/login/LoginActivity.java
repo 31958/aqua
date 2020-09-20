@@ -1,5 +1,10 @@
 package com.aqua.ui.login;
 
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
@@ -12,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -26,6 +32,10 @@ import android.widget.Toast;
 import com.aqua.R;
 import com.aqua.ui.DrawerActivity;
 import com.aqua.ui.settings.SettingsActivity;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -129,11 +139,53 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
+    private void token(){
+        AccountManager am = AccountManager.get(this);
+        Bundle options = new Bundle();
+
+        am.getAuthToken(
+                myAccount_,                     // Account retrieved using getAccountsByType()
+                "Manage your tasks",            // Auth scope
+                options,                        // Authenticator-specific options
+                this,                           // Your activity
+                new OnTokenAcquired(),          // Callback called when a token is successfully acquired
+                new Handler(new OnError()));    // Callback called if an error occurs
+    }
+
+    private void login(){
+        URL url = new URL("https://www.googleapis.com/tasks/v1/users/@me/lists?key=" + your_api_key);
+        URLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.addRequestProperty("client_id", your client id);
+        conn.addRequestProperty("client_secret", your client secret);
+        conn.setRequestProperty("Authorization", "OAuth " + token);
+    }
+
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
     public void showPopup(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
+        @Override
+        public void run(AccountManagerFuture<Bundle> result) {
+            // Get the result of the operation from the AccountManagerFuture.
+            Bundle bundle = null;
+            try {
+                bundle = result.getResult();
+            } catch (AuthenticatorException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (OperationCanceledException e) {
+                e.printStackTrace();
+            }
+
+            // The token is a named value in the bundle. The name of the value
+            // is stored in the constant AccountManager.KEY_AUTHTOKEN.
+            String token = bundle.getString(AccountManager.KEY_AUTHTOKEN);
+        }
     }
 }
