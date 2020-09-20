@@ -1,5 +1,7 @@
 package com.aqua.data.oauth;
 
+import com.aqua.GlobalVariables;
+
 import org.dmfs.httpessentials.client.HttpRequestExecutor;
 import org.dmfs.httpessentials.httpurlconnection.HttpUrlConnectionExecutor;
 import org.dmfs.oauth2.client.BasicOAuth2AuthorizationProvider;
@@ -15,9 +17,9 @@ import org.dmfs.oauth2.client.grants.ImplicitGrant;
 import org.dmfs.oauth2.client.scope.BasicScope;
 import org.dmfs.rfc3986.encoding.Precoded;
 import org.dmfs.rfc3986.uris.LazyUri;
+import org.dmfs.rfc5545.Duration;
 
 import java.net.URI;
-import java.time.Duration;
 
 public class Connect {
     public static void main(String[] args) {
@@ -27,13 +29,13 @@ public class Connect {
 
         // Create OAuth2 provider
         OAuth2AuthorizationProvider provider = new BasicOAuth2AuthorizationProvider(
-                URI.create("http://example.com/auth"),
-                URI.create("http://example.com/token"),
+                URI.create(GlobalVariables.authorize),
+                URI.create(GlobalVariables.token),
                 new Duration(1,0,3600) /* default expiration time in case the server doesn't return any */);
 
         // Create OAuth2 client credentials
         OAuth2ClientCredentials credentials = new BasicOAuth2ClientCredentials(
-                "client-id", "client-password");
+                "testclient", "testpass");
 
         // Create OAuth2 client
         OAuth2Client client = new BasicOAuth2Client(
@@ -50,16 +52,13 @@ public class Connect {
 
         // Open the URL in a WebView and wait for the redirect to the redirect URL
         // After the redirect, feed the URL to the grant to retrieve the access token
-        OAuth2AccessToken token = grant.withRedirect(redirectUrl).accessToken(executor);
+       // OAuth2AccessToken token = grant.withRedirect(redirectUrl).accessToken(executor);
 
         // Start an interactive Implicit Grant
-        OAuth2InteractiveGrant grant = new ImplicitGrant(client, new BasicScope("scope"));
-
-        // Get the authorization URL and open it in a WebView
-        URI authorizationUrl = grant.authorizationUrl();
+       // OAuth2InteractiveGrant grant = new ImplicitGrant(client, new BasicScope("scope"));
 
         // Open the URL in a WebView and wait for the redirect to the redirect URL
         // After the redirect, feed it to the grant to retrieve the access token
-        OAuth2AccessToken token = grant.withRedirect(redirectUrl).accessToken(executor);
+       // OAuth2AccessToken token = grant.withRedirect(redirectUrl).accessToken(executor);
     }
 }

@@ -6,19 +6,12 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.aqua.GlobalVariables;
-import com.aqua.data.Message;
-import com.aqua.data.PostRequest;
-import com.aqua.data.RequestMessageID;
+import com.aqua.data.HttpPostRequest;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 public class RequestAccessToken extends AsyncTask<String, Void, String> {
 
@@ -44,7 +37,7 @@ public class RequestAccessToken extends AsyncTask<String, Void, String> {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        String response = PostRequest.Post(url, values);
+        String response = HttpPostRequest.Post(url, values);
 
     }
 }

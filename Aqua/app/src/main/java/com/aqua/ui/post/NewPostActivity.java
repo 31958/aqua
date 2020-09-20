@@ -48,7 +48,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         try {
             //TODO: change variable
-            postTask.setUrl(new URL(GlobalVariables.message));
+            postTask.setUrl(new URL(GlobalVariables.postmessage));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

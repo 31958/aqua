@@ -14,7 +14,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.StringJoiner;
 
-public class PostRequest {
+public class HttpPostRequest {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static String Post(URL url, Map<String,String> values){
         try{
@@ -32,15 +32,24 @@ public class PostRequest {
             try(OutputStream os = con.getOutputStream()){
                 os.write(out);
             }
-            StringBuilder sb = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                sb.append(line);
-                sb.append("\n");
+            Integer responseCode = con.getResponseCode();
+            System.out.println("Response Code : " + responseCode);
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader inputReader = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = inputReader.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                inputReader.close();
+                return response.toString();
+            }else{
+                return "";
             }
-            return sb.toString();
         }catch(Exception e){
             e.printStackTrace();
         }

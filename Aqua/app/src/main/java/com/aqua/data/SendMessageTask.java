@@ -5,14 +5,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 public class SendMessageTask extends AsyncTask<String, Void, String> {
         private Message message;
@@ -36,7 +31,7 @@ public class SendMessageTask extends AsyncTask<String, Void, String> {
             msg.put("message",this.message.getMessage());
             msg.put("dateTime",this.message.getDateTime().toString());
 
-            String response = PostRequest.Post(this.url, msg);
+            String response = HttpPostRequest.Post(this.url, msg);
 
             //TODO: delete this
             System.out.println(response);

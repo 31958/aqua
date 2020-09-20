@@ -30,7 +30,7 @@ public class PostTask extends AsyncTask<String, Void, String> {
         post.put("postContent",this.post.getPostContent());
         post.put("dateTime",this.post.getDateTime().toString());
 
-        String response = PostRequest.Post(this.url, post);
+        String response = HttpPostRequest.Post(this.url, post);
 
         //TODO: delete this
         System.out.println(response);

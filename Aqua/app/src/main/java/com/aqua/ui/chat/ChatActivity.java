@@ -4,6 +4,7 @@ import com.aqua.GlobalVariables;
 import com.aqua.R;
 
 import com.aqua.data.Message;
+import com.aqua.data.RetrieveMessageTask;
 import com.aqua.data.SendMessageTask;
 
 import androidx.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 public class ChatActivity extends AppCompatActivity
@@ -51,12 +53,28 @@ public class ChatActivity extends AppCompatActivity
 
         SendMessageTask sendMessageTask = new SendMessageTask();
         sendMessageTask.setMessage(msg);
+
         try {
-            sendMessageTask.setUrl(new URL(GlobalVariables.message));
+            sendMessageTask.setUrl(new URL(GlobalVariables.postmessage));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
         sendMessageTask.execute();
+
+        retrieveMessage();
+    }
+
+    // TODO: add security to this function using oauth
+    private void retrieveMessage(){
+
+        RetrieveMessageTask retrieveMessageTask = new RetrieveMessageTask();
+        try {
+            retrieveMessageTask.setUrl(new URL(GlobalVariables.getmessage));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        retrieveMessageTask.execute();
     }
 
     public void setReceiverID(int receiverID) {
