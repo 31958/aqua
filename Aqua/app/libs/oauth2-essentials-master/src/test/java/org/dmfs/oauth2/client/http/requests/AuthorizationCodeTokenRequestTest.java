@@ -66,7 +66,7 @@ public class AuthorizationCodeTokenRequestTest
             }
         };
 
-        // get the entity to test
+        // get the entity to discover
         HttpRequestEntity entity = new AuthorizationCodeTokenRequest(authorization, new LazyUri(new Precoded("http://example.com")), "123").requestEntity();
 
         // get the entity data and parse it as x-www-form-urlencoded
@@ -74,10 +74,10 @@ public class AuthorizationCodeTokenRequestTest
         entity.writeContent(out);
         ParameterList params = new XwfueParameterList(new Precoded(new String(out.toByteArray())));
 
-        // test content type
+        // discover content type
         assertThat(entity.contentType(), is(PresentMatcher.<MediaType>present(new StringMediaType("application/x-www-form-urlencoded"))));
 
-        // test data
+        // discover data
         assertEquals("123", new TextParameter(new BasicParameterType<CharSequence>("code_verifier", TextValueType.INSTANCE), params).toString());
         assertEquals("authcode", new TextParameter(new BasicParameterType<CharSequence>("code", TextValueType.INSTANCE), params).toString());
         assertEquals("http://example.com", new TextParameter(new BasicParameterType<CharSequence>("redirect_uri", TextValueType.INSTANCE), params).toString());
@@ -112,7 +112,7 @@ public class AuthorizationCodeTokenRequestTest
     @Test
     public void testHeaders() throws Exception
     {
-        // we don't need any specific headers, so there is nothing to test
+        // we don't need any specific headers, so there is nothing to discover
     }
 
 

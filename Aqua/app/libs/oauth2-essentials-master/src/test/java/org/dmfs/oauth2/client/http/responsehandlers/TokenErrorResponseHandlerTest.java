@@ -38,7 +38,7 @@ import static org.junit.Assert.fail;
 /**
  * Test the {@link TokenErrorResponseHandler}.
  * <p/>
- * TODO: also test some invalid responses.
+ * TODO: also discover some invalid responses.
  *
  * @author Marten Gajda <marten@dmfs.org>
  */

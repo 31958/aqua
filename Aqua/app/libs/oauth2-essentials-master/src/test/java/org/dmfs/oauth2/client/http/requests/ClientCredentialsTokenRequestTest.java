@@ -39,7 +39,7 @@ import static org.junit.Assert.assertThat;
 
 
 /**
- * Unit test for {@link ClientCredentialsTokenRequest}.
+ * Unit discover for {@link ClientCredentialsTokenRequest}.
  *
  * @author Marten Gajda
  */
@@ -48,7 +48,7 @@ public class ClientCredentialsTokenRequestTest
     @Test
     public void test() throws IOException
     {
-        // get the entity to test
+        // get the entity to discover
         HttpRequestEntity entity = new ClientCredentialsTokenRequest(new StringScope("s1 s2")).requestEntity();
 
         // get the entity data and parse it as x-www-form-urlencoded
@@ -56,13 +56,13 @@ public class ClientCredentialsTokenRequestTest
         entity.writeContent(out);
         ParameterList params = new XwfueParameterList(new Precoded(new String(out.toByteArray())));
 
-        // test content type
+        // discover content type
         assertThat(entity.contentType(), is(present(
                 allOf(
                         is(new StringMediaType("application/x-www-form-urlencoded")),
                         having(t -> t.charset("any"), is("UTF-8"))))));
 
-        // test data
+        // discover data
         assertEquals("client_credentials", new TextParameter(new BasicParameterType<CharSequence>("grant_type", TextValueType.INSTANCE), params).toString());
         assertEquals("s1 s2", new TextParameter(new BasicParameterType<CharSequence>("scope", TextValueType.INSTANCE), params).toString());
     }

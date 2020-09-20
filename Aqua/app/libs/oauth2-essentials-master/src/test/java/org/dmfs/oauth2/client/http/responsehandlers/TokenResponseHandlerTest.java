@@ -37,7 +37,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Test the {@link TokenResponseHandler}.
  * <p/>
- * TODO: also test some invalid responses.
+ * TODO: also discover some invalid responses.
  *
  * @author Marten Gajda <marten@dmfs.org>
  */
@@ -58,7 +58,7 @@ public class TokenResponseHandlerTest
         assertEquals("tGzv3JOkF0XG5Qx2TlKWIA", token.refreshToken());
         assertTrue(token.hasRefreshToken());
         assertEquals("example", token.tokenType());
-        // note this is quite fragile: it assumes that the test completes in much less time than 1 second and doesn't span over two seconds
+        // note this is quite fragile: it assumes that the discover completes in much less time than 1 second and doesn't span over two seconds
         assertEquals(System.currentTimeMillis() / 1000 + 3600, token.expirationDate().getTimestamp() / 1000);
     }
 }

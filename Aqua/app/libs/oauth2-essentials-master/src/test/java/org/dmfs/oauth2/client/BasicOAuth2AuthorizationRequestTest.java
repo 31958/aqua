@@ -53,7 +53,7 @@ public class BasicOAuth2AuthorizationRequestTest
     @Test
     public void testBasicOAuth2AuthorizationRequestStringOAuth2ScopeString()
     {
-        // note this test makes assumptions about the order of query parameters which is wrong.
+        // note this discover makes assumptions about the order of query parameters which is wrong.
         assertEquals(URI.create("http://example.com/auth?response_type=code&scope=&state=1234"),
                 new BasicOAuth2AuthorizationRequest("code",
                         EmptyScope.INSTANCE, "1234")
@@ -65,7 +65,7 @@ public class BasicOAuth2AuthorizationRequestTest
         assertEquals(URI.create(
                 "http://example.com/auth?response_type=code&scope=calendar+test+http%3A%2F%2Fexample.com%2Fcontacts&state=1234"),
                 new BasicOAuth2AuthorizationRequest("code",
-                        new BasicScope("calendar", "test", "http://example.com/contacts"), "1234")
+                        new BasicScope("calendar", "discover", "http://example.com/contacts"), "1234")
                         .authorizationUri(URI.create("http://example.com/auth")));
     }
 
@@ -73,7 +73,7 @@ public class BasicOAuth2AuthorizationRequestTest
     @Test
     public void testWithClientId()
     {
-        // note this test makes assumptions about the order of query parameters which is wrong.
+        // note this discover makes assumptions about the order of query parameters which is wrong.
         assertEquals(URI.create("http://example.com/auth?response_type=code&scope=&state=1234&client_id=abcd"),
                 new BasicOAuth2AuthorizationRequest("code",
                         EmptyScope.INSTANCE, "1234")
@@ -89,7 +89,7 @@ public class BasicOAuth2AuthorizationRequestTest
                 URI.create(
                         "http://example.com/auth?response_type=code&scope=calendar+test+http%3A%2F%2Fexample.com%2Fcontacts&state=1234&client_id=ab%3Ad"),
                 new BasicOAuth2AuthorizationRequest("code",
-                        new BasicScope("calendar", "test", "http://example.com/contacts"), "1234")
+                        new BasicScope("calendar", "discover", "http://example.com/contacts"), "1234")
                         .withClientId("ab:d")
                         .authorizationUri(URI.create("http://example.com/auth")));
     }
@@ -98,7 +98,7 @@ public class BasicOAuth2AuthorizationRequestTest
     @Test
     public void testWithRedirectUri()
     {
-        // note this test makes assumptions about the order of query parameters which is wrong.
+        // note this discover makes assumptions about the order of query parameters which is wrong.
         assertEquals(URI.create(
                 "http://example.com/auth?response_type=code&scope=&state=1234&client_id=abcd&redirect_uri=http%3A%2F%2Flocalhost%3A1234"),
                 new BasicOAuth2AuthorizationRequest("code",
@@ -118,7 +118,7 @@ public class BasicOAuth2AuthorizationRequestTest
                 URI.create(
                         "http://example.com/auth?response_type=code&scope=calendar+test+http%3A%2F%2Fexample.com%2Fcontacts&state=1234&client_id=ab%3Ad&redirect_uri=http%3A%2F%2Flocalhost%3A1234"),
                 new BasicOAuth2AuthorizationRequest("code",
-                        new BasicScope("calendar", "test", "http://example.com/contacts"), "1234")
+                        new BasicScope("calendar", "discover", "http://example.com/contacts"), "1234")
                         .withClientId("ab:d")
                         .withRedirectUri(new LazyUri(new Precoded("http://localhost:1234")))
                         .authorizationUri(URI.create("http://example.com/auth")));
@@ -150,7 +150,7 @@ public class BasicOAuth2AuthorizationRequestTest
                 URI.create(
                         "http://example.com/auth?custom=customvalue&response_type=code&scope=calendar+test+http%3A%2F%2Fexample.com%2Fcontacts&state=1234&client_id=ab%3Ad&redirect_uri=http%3A%2F%2Flocalhost%3A1234"),
                 new BasicOAuth2AuthorizationRequest("code",
-                        new BasicScope("calendar", "test", "http://example.com/contacts"), "1234", parameters)
+                        new BasicScope("calendar", "discover", "http://example.com/contacts"), "1234", parameters)
                         .withClientId("ab:d")
                         .withRedirectUri(new LazyUri(new Precoded("http://localhost:1234")))
                         .authorizationUri(URI.create("http://example.com/auth")));

@@ -31,8 +31,8 @@ public class StringScopeTest
     public void testTokenCount() throws Exception
     {
         assertThat(new StringScope("").tokenCount(), is(0));
-        assertThat(new StringScope("test").tokenCount(), is(1));
-        assertThat(new StringScope("test calendar").tokenCount(), is(2));
+        assertThat(new StringScope("discover").tokenCount(), is(1));
+        assertThat(new StringScope("discover calendar").tokenCount(), is(2));
     }
 
 
@@ -40,20 +40,20 @@ public class StringScopeTest
     public void testIsEmpty()
     {
         assertTrue(new StringScope("").isEmpty());
-        assertFalse(new StringScope("test").isEmpty());
-        assertFalse(new StringScope("test calendar").isEmpty());
+        assertFalse(new StringScope("discover").isEmpty());
+        assertFalse(new StringScope("discover calendar").isEmpty());
     }
 
 
     @Test
     public void testHasToken()
     {
-        assertFalse(new StringScope("").hasToken("test"));
-        assertTrue(new StringScope("test").hasToken("test"));
-        assertFalse(new StringScope("test").hasToken("calendar"));
-        assertTrue(new StringScope("test calendar").hasToken("test"));
-        assertTrue(new StringScope("test calendar").hasToken("calendar"));
-        assertFalse(new StringScope("test calendar").hasToken("foo"));
+        assertFalse(new StringScope("").hasToken("discover"));
+        assertTrue(new StringScope("discover").hasToken("discover"));
+        assertFalse(new StringScope("discover").hasToken("calendar"));
+        assertTrue(new StringScope("discover calendar").hasToken("discover"));
+        assertTrue(new StringScope("discover calendar").hasToken("calendar"));
+        assertFalse(new StringScope("discover calendar").hasToken("foo"));
     }
 
 
@@ -61,8 +61,8 @@ public class StringScopeTest
     public void testToString()
     {
         assertEquals("", new StringScope("").toString());
-        assertEquals("test", new StringScope("test").toString());
-        assertEquals("test calendar", new StringScope("test calendar").toString());
+        assertEquals("discover", new StringScope("discover").toString());
+        assertEquals("discover calendar", new StringScope("discover calendar").toString());
     }
 
 }

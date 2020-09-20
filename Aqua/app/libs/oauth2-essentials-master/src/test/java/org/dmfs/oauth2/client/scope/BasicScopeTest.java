@@ -30,20 +30,20 @@ public class BasicScopeTest
     public void testIsEmpty()
     {
         assertTrue(new BasicScope().isEmpty());
-        assertFalse(new BasicScope("test").isEmpty());
-        assertFalse(new BasicScope("test", "calendar").isEmpty());
+        assertFalse(new BasicScope("discover").isEmpty());
+        assertFalse(new BasicScope("discover", "calendar").isEmpty());
     }
 
 
     @Test
     public void testHasToken()
     {
-        assertFalse(new BasicScope().hasToken("test"));
-        assertTrue(new BasicScope("test").hasToken("test"));
-        assertFalse(new BasicScope("test").hasToken("calendar"));
-        assertTrue(new BasicScope("test", "calendar").hasToken("test"));
-        assertTrue(new BasicScope("test", "calendar").hasToken("calendar"));
-        assertFalse(new BasicScope("test", "calendar").hasToken("foo"));
+        assertFalse(new BasicScope().hasToken("discover"));
+        assertTrue(new BasicScope("discover").hasToken("discover"));
+        assertFalse(new BasicScope("discover").hasToken("calendar"));
+        assertTrue(new BasicScope("discover", "calendar").hasToken("discover"));
+        assertTrue(new BasicScope("discover", "calendar").hasToken("calendar"));
+        assertFalse(new BasicScope("discover", "calendar").hasToken("foo"));
     }
 
 
@@ -51,8 +51,8 @@ public class BasicScopeTest
     public void testToString()
     {
         assertEquals("", new BasicScope().toString());
-        assertEquals("test", new BasicScope("test").toString());
-        assertEquals("test calendar", new BasicScope("test", "calendar").toString());
+        assertEquals("discover", new BasicScope("discover").toString());
+        assertEquals("discover calendar", new BasicScope("discover", "calendar").toString());
     }
 
 }

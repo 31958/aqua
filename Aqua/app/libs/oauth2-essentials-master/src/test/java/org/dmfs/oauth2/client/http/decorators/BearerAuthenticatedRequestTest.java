@@ -42,7 +42,7 @@ import static org.junit.Assert.fail;
 
 
 /**
- * Unit test for {@link BearerAuthenticatedRequest}.
+ * Unit discover for {@link BearerAuthenticatedRequest}.
  *
  * @author Gabor Keszthelyi
  */

@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Functional test for {@link BasicAuthHeaderDecoration}.
+ * Functional discover for {@link BasicAuthHeaderDecoration}.
  *
  * @author Gabor Keszthelyi
  */

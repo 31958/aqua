@@ -36,7 +36,7 @@ public class EmptyScopeTest
     @Test
     public void testHasToken()
     {
-        assertFalse(new EmptyScope().hasToken("test"));
+        assertFalse(new EmptyScope().hasToken("discover"));
     }
 
 

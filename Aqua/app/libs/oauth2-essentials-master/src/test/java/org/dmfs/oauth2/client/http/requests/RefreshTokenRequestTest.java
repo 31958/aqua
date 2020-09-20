@@ -39,7 +39,7 @@ import static org.junit.Assert.assertThat;
 
 
 /**
- * Unit test for {@link RefreshTokenRequest}.
+ * Unit discover for {@link RefreshTokenRequest}.
  *
  * @author Marten Gajda
  */
@@ -48,7 +48,7 @@ public class RefreshTokenRequestTest
     @Test
     public void test() throws IOException
     {
-        // get the entity to test
+        // get the entity to discover
         HttpRequestEntity entity = new RefreshTokenRequest(new StringScope("s1 s2"), "token").requestEntity();
 
         // get the entity data and parse it as x-www-form-urlencoded
@@ -56,13 +56,13 @@ public class RefreshTokenRequestTest
         entity.writeContent(out);
         ParameterList params = new XwfueParameterList(new Precoded(new String(out.toByteArray())));
 
-        // test content type
+        // discover content type
         assertThat(entity.contentType(), is(present(
                 allOf(
                         is(new StringMediaType("application/x-www-form-urlencoded")),
                         having(t -> t.charset("any"), is("UTF-8"))))));
 
-        // test data
+        // discover data
         assertEquals("refresh_token", new TextParameter(new BasicParameterType<CharSequence>("grant_type", TextValueType.INSTANCE), params).toString());
         assertEquals("token", new TextParameter(new BasicParameterType<CharSequence>("refresh_token", TextValueType.INSTANCE), params).toString());
         assertEquals("s1 s2", new TextParameter(new BasicParameterType<CharSequence>("scope", TextValueType.INSTANCE), params).toString());
