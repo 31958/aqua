@@ -13,15 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.Contacts"
-            android:label="@string/title_activity_contacts"
+            android:name=".ui.ProfileListActivity"
+            android:label="@string/title_profile_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ui.ProfileDetailActivity"
+            android:label="@string/title_profile_detail"
+            android:parentActivityName=".ui.ProfileListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aqua.ui.ProfileListActivity" />
+        </activity>
+        <activity
+            android:name=".ui.Contacts"
+            android:label="@string/title_activity_contacts"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.post.NewPostActivity"
-            android:parentActivityName=".ui.post.PostsActivity"></activity>
+            android:parentActivityName=".ui.post.PostsActivity" />
         <activity
             android:name=".ui.post.PostsActivity"
-            android:parentActivityName=".ui.DrawerActivity"></activity>
+            android:parentActivityName=".ui.DrawerActivity" />
         <activity
             android:name=".ui.DrawerActivity"
             android:label="@string/title_activity_drawer"
@@ -37,7 +50,7 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".ui.chat.ChatActivity"
             android:label="Chat" />
