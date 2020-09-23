@@ -33,22 +33,21 @@ public class NewPostActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String postText = postEdit.getText().toString(); //Get txt
-                sendPost(postText);
+                uploadPost(postText);
 
             }
         });
 
     }
 
-    private void sendPost(String postText) {
+    private void uploadPost(String postText) {
         Post post = new Post(postText);
 
         PostTask postTask = new PostTask();
         postTask.setPost(post);
 
         try {
-            //TODO: change variable
-            postTask.setUrl(new URL(GlobalVariables.postmessage));
+            postTask.setUrl(new URL(GlobalVariables.uploadpost));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

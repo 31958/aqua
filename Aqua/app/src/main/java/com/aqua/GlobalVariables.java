@@ -2,6 +2,7 @@ package com.aqua;
 
 public class GlobalVariables {
     // Strings are immutable, so it is fine to use the final tag here
+    public static final String uploadpost = "http://elitegateinternational.co.uk/uploadpost.php";
     public static final String postmessage = "http://elitegateinternational.co.uk/postmessage.php";
     public static final String getmessage = "http://elitegateinternational.co.uk/getmessage.php";
     public static final String server = "http://elitegateinternational.co.uk/server.php";
