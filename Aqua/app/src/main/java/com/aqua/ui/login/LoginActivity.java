@@ -140,24 +140,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void token(){
-        AccountManager am = AccountManager.get(this);
-        Bundle options = new Bundle();
 
-        am.getAuthToken(
-                myAccount_,                     // Account retrieved using getAccountsByType()
-                "Manage your tasks",            // Auth scope
-                options,                        // Authenticator-specific options
-                this,                           // Your activity
-                new OnTokenAcquired(),          // Callback called when a token is successfully acquired
-                new Handler(new OnError()));    // Callback called if an error occurs
     }
 
     private void login(){
-        URL url = new URL("https://www.googleapis.com/tasks/v1/users/@me/lists?key=" + your_api_key);
-        URLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.addRequestProperty("client_id", your client id);
-        conn.addRequestProperty("client_secret", your client secret);
-        conn.setRequestProperty("Authorization", "OAuth " + token);
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
