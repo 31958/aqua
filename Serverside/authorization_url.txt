@@ -1,0 +1,1 @@
+http://www.elitegateinternational.co.uk/authorize.php?response_type=code&client_id=testclient&state=xyz
