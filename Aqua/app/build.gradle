@@ -44,6 +44,4 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.discover.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.discover.espresso:espresso-core:3.3.0'
 }
