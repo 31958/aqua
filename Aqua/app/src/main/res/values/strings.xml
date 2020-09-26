@@ -151,4 +151,12 @@
     <string name="text">Text</string>
     <string name="time">Time</string>
     <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="tag1">#Tag1</string>
+    <string name="published_time">Published Time</string>
+    <string name="todo">TODO</string>
+    <string name="context">Context</string>
+    <string name="somebody">Somebody:</string>
+    <string name="context">Context</string>
+    <string name="todo">TODO</string>
 </resources>

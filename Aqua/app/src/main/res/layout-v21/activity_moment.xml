@@ -178,6 +178,11 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
@@ -217,8 +222,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="15.4dp"
                         android:src="@drawable/iconblog_save"
-                        app:srcCompat="@android:drawable/ic_menu_revert"
-                        android:contentDescription="@string/todo" />
+                        app:srcCompat="@android:drawable/ic_menu_revert" />
 
                 </LinearLayout>
 
@@ -235,12 +239,11 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="20dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView16"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Username:"
@@ -254,11 +257,10 @@
 
                     <TextView
                         android:id="@+id/textView27"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="@string/context" />
+                        android:text="Context" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -274,16 +276,14 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0"
-                    android:orientation="horizontal"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="20dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView17"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/somebody"
+                        android:text="Username:"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -294,10 +294,10 @@
 
                     <TextView
                         android:id="@+id/textView18"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/context" />
+                        android:text="Context" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -323,7 +323,7 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/grey_line_thicker"
                     tools:srcCompat="@drawable/grey_line_thicker"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="TODO" />
             </LinearLayout>
 
             <LinearLayout
