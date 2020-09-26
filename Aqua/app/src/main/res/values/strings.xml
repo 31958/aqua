@@ -6,9 +6,11 @@
     <string name="postmessage">http://elitegateinternational.co.uk/postmessage.php</string>
     <string name="getmessage">http://elitegateinternational.co.uk/getmessage.php</string>
     <string name="server">http://elitegateinternational.co.uk/server.php</string>
-    <string name="authorize">http://elitegateinternational.co.uk/authorize.php</string>
+    <string name="authorize">http://elitegateinternational.co.uk/authorize.php</string>-
     <string name="resources">http://elitegateinternational.co.uk/resources.php</string>
     <string name="token">http://elitegateinternational.co.uk/token.php</string>
+    <string name="redirect">http://www.elitegateinternational.co.uk/clientauthsuccess</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

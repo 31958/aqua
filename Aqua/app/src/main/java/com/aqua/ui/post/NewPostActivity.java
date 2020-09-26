@@ -1,12 +1,15 @@
 package com.aqua.ui.post;
 
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.aqua.GlobalVariables;
+
 import com.aqua.R;
 import com.aqua.data.Post;
 import com.aqua.data.PostTask;
@@ -29,6 +32,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         //Set sending listener
         sendButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
 
@@ -40,6 +44,7 @@ public class NewPostActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void uploadPost(String postText) {
         Post post = new Post(postText);
 
@@ -47,7 +52,7 @@ public class NewPostActivity extends AppCompatActivity {
         postTask.setPost(post);
 
         try {
-            postTask.setUrl(new URL(GlobalVariables.uploadpost));
+            postTask.setUrl(new URL(getString(R.string.uploadpost)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

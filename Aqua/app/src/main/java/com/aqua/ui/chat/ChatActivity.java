@@ -1,6 +1,5 @@
 package com.aqua.ui.chat;
 
-import com.aqua.GlobalVariables;
 import com.aqua.R;
 
 import com.aqua.data.Message;
@@ -18,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 public class ChatActivity extends AppCompatActivity
@@ -55,7 +53,7 @@ public class ChatActivity extends AppCompatActivity
         sendMessageTask.setMessage(msg);
 
         try {
-            sendMessageTask.setUrl(new URL(GlobalVariables.postmessage));
+            sendMessageTask.setUrl(new URL(getString(R.string.postmessage)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -70,7 +68,7 @@ public class ChatActivity extends AppCompatActivity
 
         RetrieveMessageTask retrieveMessageTask = new RetrieveMessageTask();
         try {
-            retrieveMessageTask.setUrl(new URL(GlobalVariables.getmessage));
+            retrieveMessageTask.setUrl(new URL(getString(R.string.getmessage)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

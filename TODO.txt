@@ -1,0 +1,1 @@
+https://www.oauth.com/oauth2-servers/redirect-uris/redirect-uris-native-apps/
