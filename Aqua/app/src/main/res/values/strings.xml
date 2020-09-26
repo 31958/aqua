@@ -148,4 +148,7 @@
     <string name="title_profile_list">Profiles</string>
     <string name="title_profile_detail">Profile Detail</string>
     <string name="train">Train</string>
+    <string name="text">Text</string>
+    <string name="time">Time</string>
+    <string name="name">Name</string>
 </resources>
