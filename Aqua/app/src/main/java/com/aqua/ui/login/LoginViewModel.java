@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.util.Log;
 import android.util.Patterns;
 
 import com.aqua.data.LoginRepository;
 import com.aqua.data.Result;
 import com.aqua.data.model.LoggedInUser;
 import com.aqua.R;
+import com.aqua.data.oauth.LoginTask;
 import com.aqua.data.oauth.OAuthUtil;
 
 import org.dmfs.httpessentials.exceptions.ProtocolException;
@@ -36,13 +38,10 @@ public class LoginViewModel extends ViewModel {
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
-        OAuth2AccessToken token = OAuthUtil.userResourceGrant(username, password);
-
-        try {
-            System.out.println(token.accessToken());
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        }
+        LoginTask loginTask = new LoginTask();
+        LoginTask.password = password;
+        LoginTask.username = username;
+        loginTask.execute();
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
