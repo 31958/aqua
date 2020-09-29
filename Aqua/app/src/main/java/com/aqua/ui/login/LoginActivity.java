@@ -30,8 +30,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aqua.R;
+import com.aqua.data.oauth.OAuthUtil;
 import com.aqua.ui.DrawerActivity;
 import com.aqua.ui.settings.SettingsActivity;
+
+import org.dmfs.oauth2.client.OAuth2AccessToken;
 
 import java.io.IOException;
 import java.net.URL;
@@ -139,20 +142,8 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void token(){
-
-    }
-
-    private void login(){
-
-    }
-
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    public void showPopup(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     private class OnTokenAcquired implements AccountManagerCallback<Bundle> {

@@ -52,7 +52,7 @@ public class NewPostActivity extends AppCompatActivity {
         postTask.setPost(post);
 
         try {
-            postTask.setUrl(new URL(getString(R.string.uploadpost)));
+            postTask.setUrl(new URL(getString(R.string.upload_post)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

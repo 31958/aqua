@@ -53,7 +53,7 @@ public class ChatActivity extends AppCompatActivity
         sendMessageTask.setMessage(msg);
 
         try {
-            sendMessageTask.setUrl(new URL(getString(R.string.postmessage)));
+            sendMessageTask.setUrl(new URL(getString(R.string.post_message)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class ChatActivity extends AppCompatActivity
 
         RetrieveMessageTask retrieveMessageTask = new RetrieveMessageTask();
         try {
-            retrieveMessageTask.setUrl(new URL(getString(R.string.getmessage)));
+            retrieveMessageTask.setUrl(new URL(getString(R.string.get_message)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

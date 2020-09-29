@@ -25,6 +25,7 @@ import java.net.URI;
 
 public class OAuthUtil{
     static OAuth2Client client;
+    static OAuth2AccessToken accessToken;
     static HttpRequestExecutor executor;
 
     public static void initialize(String authorize, String token, String clientId, String clientSecret, String redirect) {
@@ -92,11 +93,13 @@ public class OAuthUtil{
         }
     }
 
-    public static void userResourceGrant (String username, String password){
+    public static OAuth2AccessToken userResourceGrant (String username, String password){
         // Request access token using a Resource Owner Password Grant
         try {
             OAuth2AccessToken token = new ResourceOwnerPasswordGrant(
                     client, new BasicScope("scope"), username, password).accessToken(executor);
+            accessToken = token;
+            return token;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ProtocolError protocolError) {
@@ -104,5 +107,6 @@ public class OAuthUtil{
         } catch (ProtocolException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

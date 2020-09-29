@@ -17,6 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.aqua.R;
 import com.aqua.ui.chat.ChatActivity;
+import com.aqua.ui.login.LoginActivity;
 import com.aqua.ui.post.PostsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -40,8 +41,6 @@ public class DrawerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(intent);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -62,6 +61,15 @@ public class DrawerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent fp=new Intent(DrawerActivity.this,PostsActivity.class);
+                startActivity(fp);
+            }
+        });
+
+        final Button account = findViewById(R.id.account);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fp=new Intent(DrawerActivity.this, LoginActivity.class);
                 startActivity(fp);
             }
         });

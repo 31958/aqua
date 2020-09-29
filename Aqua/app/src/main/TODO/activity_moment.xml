@@ -135,7 +135,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15.4dp"
                         android:layout_marginRight="15.4dp"
-                        android:src="@drawable/iconblog_save"
+                        android:src="@drawable/ic_menu_send"
                         app:srcCompat="@android:drawable/ic_menu_revert"
                         tools:srcCompat="@drawable/grey_line" />
 
@@ -155,7 +155,7 @@
                             android:layout_width="40dp"
                             android:layout_height="30dp"
                             android:paddingLeft="18.7dp"
-                            android:src="@drawable/iconblog_fav"
+                            android:src="@drawable/ic_menu_share"
                             app:srcCompat="@drawable/tag" />
                     </LinearLayout>
 
@@ -178,11 +178,6 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
@@ -191,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginright="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_weight="1"
                             android:background="@color/overlay_dark_20"
                             android:padding="3dp"
@@ -212,7 +207,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:paddingLeft="18.7dp"
-                        android:src="@drawable/iconblog_fav"
+                        android:src="@drawable/ic_menu_camera"
                         app:srcCompat="@android:drawable/star_big_off" />
 
 
@@ -221,8 +216,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="15.4dp"
-                        android:src="@drawable/iconblog_save"
-                        app:srcCompat="@android:drawable/ic_menu_revert" />
+                        android:src="@drawable/ic_menu_manage"
+                        app:srcCompat="@android:drawable/ic_menu_revert"
+                        android:contentDescription="@string/todo" />
 
                 </LinearLayout>
 
@@ -239,11 +235,12 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp">
 
                     <TextView
                         android:id="@+id/textView16"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Username:"
@@ -257,10 +254,11 @@
 
                     <TextView
                         android:id="@+id/textView27"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="Context" />
+                        android:text="@string/context" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -276,14 +274,16 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="20dp">
 
                     <TextView
                         android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Username:"
+                        android:text="@string/somebody"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -294,10 +294,10 @@
 
                     <TextView
                         android:id="@+id/textView18"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Context" />
+                        android:text="@string/context" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -323,7 +323,7 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/grey_line_thicker"
                     tools:srcCompat="@drawable/grey_line_thicker"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
             </LinearLayout>
 
             <LinearLayout
@@ -416,7 +416,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15.4dp"
                         android:layout_marginRight="15.4dp"
-                        android:src="@drawable/iconblog_save"
+                        android:src="@drawable/ic_menu_send"
                         app:srcCompat="@android:drawable/ic_menu_revert"
                         tools:srcCompat="@drawable/grey_line" />
 
@@ -436,7 +436,7 @@
                             android:layout_width="40dp"
                             android:layout_height="30dp"
                             android:paddingLeft="18.7dp"
-                            android:src="@drawable/iconblog_fav"
+                            android:src="@drawable/ic_menu_camera"
                             app:srcCompat="@drawable/tag" />
                     </LinearLayout>
 
@@ -472,7 +472,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginright="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_weight="1"
                             android:background="@color/overlay_dark_20"
                             android:padding="3dp"
@@ -493,7 +493,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:paddingLeft="18.7dp"
-                        android:src="@drawable/iconblog_fav"
+                        android:src="@drawable/ic_menu_manage"
                         app:srcCompat="@android:drawable/star_big_off" />
 
 
@@ -502,7 +502,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="15.4dp"
-                        android:src="@drawable/iconblog_save"
+                        android:src="@drawable/ic_menu_manage"
                         app:srcCompat="@android:drawable/ic_menu_revert" />
 
                 </LinearLayout>

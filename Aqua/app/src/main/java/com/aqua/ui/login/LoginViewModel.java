@@ -10,6 +10,10 @@ import com.aqua.data.LoginRepository;
 import com.aqua.data.Result;
 import com.aqua.data.model.LoggedInUser;
 import com.aqua.R;
+import com.aqua.data.oauth.OAuthUtil;
+
+import org.dmfs.httpessentials.exceptions.ProtocolException;
+import org.dmfs.oauth2.client.OAuth2AccessToken;
 
 public class LoginViewModel extends ViewModel {
 
@@ -32,6 +36,13 @@ public class LoginViewModel extends ViewModel {
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
+        OAuth2AccessToken token = OAuthUtil.userResourceGrant(username, password);
+
+        try {
+            System.out.println(token.accessToken());
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
