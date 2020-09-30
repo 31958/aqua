@@ -3,6 +3,7 @@ package com.aqua.ui.post;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -70,7 +71,7 @@ public class NewPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String postText = postEdit.getText().toString(); //Get txt
-                uploadPost(postText);
+                uploadPost(postText, getBitmap());
             }
         });
     }
@@ -91,8 +92,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     //Sending method
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void uploadPost(String postText) {
-        Post post = new Post(postText);
+    private void uploadPost(String postText, Bitmap postImage) {
+        Post post = new Post(postText, postImage);
 
         PostTask postTask = new PostTask();
         postTask.setPost(post);
@@ -128,4 +129,9 @@ public class NewPostActivity extends AppCompatActivity {
         }
     }
 
+    public Bitmap getBitmap() {
+        postImage.invalidate();
+        BitmapDrawable drawable = (BitmapDrawable) postImage.getDrawable();
+        return drawable.getBitmap();
+    }
 }

@@ -25,9 +25,10 @@ public class PostTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         Map<String,String> post = new HashMap<>();
-        post.put("postID",String.valueOf(this.post.getID()));
-        post.put("postAuthor_ID", String.valueOf(this.post.getAuthor_ID()));
-        post.put("postContent",this.post.getPostContent());
+        post.put("id",String.valueOf(this.post.getID()));
+        post.put("author_id", String.valueOf(this.post.getAuthor_ID()));
+        post.put("post_text",this.post.getPostText());
+        post.put("post_image",this.post.getImageAsString());
         post.put("dateTime",this.post.getDateTime().toString());
 
         String response = HttpPostRequest.Post(this.url, post);
