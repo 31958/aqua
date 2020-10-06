@@ -1,14 +1,6 @@
 package com.aqua.data;
 
-import android.os.Build;
-import android.provider.ContactsContract;
-
-import com.aqua.data.model.LoggedInUser;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.aqua.data.oauth.LoggedInUser;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -18,10 +10,8 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
         //Database.connect(username, password);
         //Database.sendMessage("login successful");
-        LoggedInUser fakeUser =
-                new LoggedInUser(
-                        java.util.UUID.randomUUID().toString(), username);
-        return new Result.Success<>(fakeUser);
+        LoggedInUser.user = new User(0,"Annonymous");
+        return new Result.Success<>(new LoggedInUser());
     }
 
     public void logout(){

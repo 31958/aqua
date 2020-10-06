@@ -98,6 +98,7 @@ public class StartupActivity extends AppCompatActivity {
                 getString(R.string.client_secret),
                 getString(R.string.redirect)
         );
+        Initialize.makeFakeUser();
         final Intent intent = new Intent(this, DrawerActivity.class);
 
         // Set up the user interaction to manually show or hide the system UI.

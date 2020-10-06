@@ -1,10 +1,21 @@
 package com.aqua.data;
 
-public class User {
-    private static String client_id;
-    private static String token;
+import java.net.URL;
 
-    public static String getClient_id(){
-        return client_id;
+public class User {
+    private int id;
+    private String token;
+    private String name;
+
+    public User(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getID(){
+        return this.id;
+    }
+    public String getName(){return this.name;}
+    public URL getProfileUrl() {return null;
     }
 }

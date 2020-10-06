@@ -1,6 +1,6 @@
 package com.aqua.data;
 
-import com.aqua.data.model.LoggedInUser;
+import com.aqua.data.oauth.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

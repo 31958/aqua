@@ -4,12 +4,14 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.aqua.data.oauth.LoggedInUser;
+
 import java.time.ZonedDateTime;
 
 public class Message {
     private int ID;
     private int receiverID;
-    private int senderID;
+    private User sender;
     private String message;
     private ZonedDateTime dateTime;
 
@@ -25,7 +27,7 @@ public class Message {
     }
 
     public int getSenderID(){
-        return this.senderID;
+        return this.sender.getID();
     }
 
     public String getMessage(){
@@ -40,8 +42,12 @@ public class Message {
     public void compose(String message, int receiverID){
         this.ID = RequestMessageID.requestID();
         this.message = message;
-        this.senderID = CurrentUser.getID();
+        this.sender = LoggedInUser.user;
         this.receiverID = receiverID;
         this.dateTime = ZonedDateTime.now();
+    }
+
+    public User getSender() {
+        return sender;
     }
 }
