@@ -18,6 +18,7 @@ import com.aqua.data.Message;
 import com.aqua.data.RetrieveMessageTask;
 import com.aqua.data.SendMessageTask;
 import com.aqua.data.chat.MessageListAdapter;
+import com.aqua.data.oauth.LoggedInUser;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,14 +41,17 @@ public class MessageListActivity extends AppCompatActivity {
 
         Message testmsg1 = new Message(), testmsg2 = new Message();
         testmsg1.compose("hello", this.receiverID);
-        testmsg2.compose("bye", 124141);
+        testmsg2.compose("bye", 123123, LoggedInUser.user.getID());
         messageList.add(testmsg1);
-
+        messageList.add(testmsg2);
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
         mMessageAdapter = new MessageListAdapter(this, messageList);
+        mMessageRecycler.setHasFixedSize(false);
 
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mMessageRecycler.setLayoutManager(linearLayoutManager);
 
         mMessageRecycler.setAdapter(mMessageAdapter);
 

@@ -331,6 +331,7 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/grey_line_thicker"
                     tools:srcCompat="@drawable/grey_line_thicker"
+                    />
             </LinearLayout>
 
         </LinearLayout>

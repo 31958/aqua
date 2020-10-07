@@ -39,6 +39,15 @@ public class Message {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    public void compose(String message, int senderID, int receiverID){
+        this.ID = RequestMessageID.requestID();
+        this.message = message;
+        this.sender = new User(senderID, "Yuhan");
+        this.receiverID = receiverID;
+        this.dateTime = ZonedDateTime.now();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void compose(String message, int receiverID){
         this.ID = RequestMessageID.requestID();
         this.message = message;
