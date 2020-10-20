@@ -1,79 +1,121 @@
 package com.aqua.ui.post;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.annotation.RequiresApi;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import com.aqua.R;
-import com.aqua.data.Post;
-import com.aqua.data.PostTask;
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.UploadNotificationConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.UUID;
 
-public class NewPostActivity extends AppCompatActivity {
+public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int GALLERY_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 200;
+    private static final int STORAGE_PERMISSION_CODE = 1234;
 
-    //components
-    private EditText postEdit;
+    private EditText editText;
     private Button sendButton;
-    private ImageView postImage;
+    private ImageView imageView;
     private Button galleryBtn;
     private Button cameraBtn;
+
+    private Uri filePath;
+
+    private Bitmap bitmap;
+
+    public static final String UPLOAD_URL = "http://www.elitegateinternational.co.uk/Aqua/upload.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
-        //Initialize
-        postEdit = findViewById(R.id.postEdit);
-        sendButton = findViewById(R.id.sendButton);
-        postImage = findViewById(R.id.postImage);
-        galleryBtn = findViewById(R.id.pickImageButton);
-        cameraBtn = findViewById(R.id.cameraBtn);
+        requestStoragePermission();
 
-        //Gallery listener
-        galleryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery(v);
-            }
-        });
+        editText = (EditText) findViewById(R.id.postEdit);
+        sendButton = (Button) findViewById(R.id.sendButton);
+        imageView = (ImageView) findViewById(R.id.postImage);
+        galleryBtn = (Button) findViewById(R.id.pickImageButton);
+        cameraBtn = (Button) findViewById(R.id.cameraBtn);
 
-        //Camera listener
-        cameraBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCamera(v);
-            }
-        });
+        sendButton.setOnClickListener(this);
+        galleryBtn.setOnClickListener(this);
+        cameraBtn.setOnClickListener(this);
+    }
 
-        //Sending listener
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View view) {
-                String postText = postEdit.getText().toString(); //Get txt
-                uploadPost(postText, getBitmap());
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //For gallery
+        if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
+            try {
+                Uri selectedImage = data.getData();
+                InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+                imageView.setImageBitmap(BitmapFactory.decodeStream(imageStream));
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
-        });
+        }
+
+        //For camera
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(imageBitmap);
+        }
+
+        //For upload
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                imageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public void openGallery(View view) {
@@ -90,48 +132,58 @@ public class NewPostActivity extends AppCompatActivity {
         }
     }
 
-    //Sending method
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void uploadPost(String postText, Bitmap postImage) {
-        Post post = new Post(postText, postImage);
+    private String getPath (Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
 
-        PostTask postTask = new PostTask();
-        postTask.setPost(post);
+        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
+        cursor.close();
+
+        cursor = getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null,
+                MediaStore.Images.Media._ID + " = ? ",
+                new String[]{document_id},
+                null
+        );
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+        return path;
+    }
+
+    //upload
+    private void uploadPost() {
+        String name = editText.getText().toString().trim();
+        String path = getPath(filePath);
 
         try {
-            postTask.setUrl(new URL(getString(R.string.upload_post)));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            String uploadID = UUID.randomUUID().toString();
+
+            new MultipartUploadRequest(this, uploadID, UPLOAD_URL)
+                    .addFileToUpload(path, "image")
+                    .addParameter("name", name)
+                    .setNotificationConfig(new UploadNotificationConfig())
+                    .setMaxRetries(2)
+                    .startUpload();
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        postTask.execute();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        //For gallery
-        if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
-            try {
-                Uri selectedImage = data.getData();
-                InputStream imageStream = getContentResolver().openInputStream(selectedImage);
-                postImage.setImageBitmap(BitmapFactory.decodeStream(imageStream));
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
+    public void onClick(View v) {
+        if (v == galleryBtn) {
+            openGallery(v);
         }
 
-        //For camera
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            postImage.setImageBitmap(imageBitmap);
+        if (v == cameraBtn) {
+            openCamera(v);
         }
-    }
 
-    public Bitmap getBitmap() {
-        postImage.invalidate();
-        BitmapDrawable drawable = (BitmapDrawable) postImage.getDrawable();
-        return drawable.getBitmap();
+        if (v == sendButton) {
+            uploadPost();
+        }
     }
 }
