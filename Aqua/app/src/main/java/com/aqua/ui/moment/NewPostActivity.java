@@ -43,8 +43,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 
     private Uri filePath;
 
-    private Bitmap bitmap;
-
     public static final String UPLOAD_URL = "http://www.elitegateinternational.co.uk/Aqua/upload.php";
 
     @Override
@@ -88,10 +86,10 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //For upload
-        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data.getData() != null) {
             filePath = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();

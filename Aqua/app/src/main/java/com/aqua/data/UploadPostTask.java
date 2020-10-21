@@ -21,8 +21,9 @@ public class UploadPostTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         Map<String, String> post = new HashMap<>();
-        post.put("imageUrl", String.valueOf(this.post.getImageUrl()));
-        post.put("postText", String.valueOf(this.post.getPostText()));
+        post.put("id", null);
+        post.put("url", String.valueOf(this.post.getImageUrl()));
+        post.put("name", String.valueOf(this.post.getPostText()));
 
         String response = HttpPostRequest.Post(this.url, post);
         System.out.println(response);
