@@ -1,4 +1,4 @@
-package com.aqua.ui.post;
+package com.aqua.ui.moment;
 
 import android.content.Intent;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.aqua.R;
+import com.aqua.ui.moment.NewPostActivity;
 
 public class PostsActivity extends AppCompatActivity {
 

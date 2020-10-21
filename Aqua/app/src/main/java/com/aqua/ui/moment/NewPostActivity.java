@@ -1,4 +1,4 @@
-package com.aqua.ui.post;
+package com.aqua.ui.moment;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,12 +21,13 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.aqua.R;
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
+import com.aqua.data.Post;
+import com.aqua.data.UploadPostTask;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.UUID;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -154,22 +155,16 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     //upload
-    private void uploadPost() {
+    private void uploadPost() throws MalformedURLException {
         String name = editText.getText().toString().trim();
         String path = getPath(filePath);
 
-        try {
-            String uploadID = UUID.randomUUID().toString();
+        Post post = new Post(path, name);
 
-            new MultipartUploadRequest(this, uploadID, UPLOAD_URL)
-                    .addFileToUpload(path, "image")
-                    .addParameter("name", name)
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
-                    .startUpload();
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        UploadPostTask uploadPostTask = new UploadPostTask();
+        uploadPostTask.setPost(post);
+        uploadPostTask.setUrl(new URL(UPLOAD_URL));
+        uploadPostTask.execute();
     }
 
     @Override
@@ -183,7 +178,11 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (v == sendButton) {
-            uploadPost();
+            try {
+                uploadPost();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

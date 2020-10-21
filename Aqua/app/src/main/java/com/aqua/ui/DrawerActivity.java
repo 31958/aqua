@@ -16,13 +16,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.aqua.R;
-import com.aqua.ui.chat.ChatActivity;
 import com.aqua.ui.chat.MessageListActivity;
 import com.aqua.ui.login.LoginActivity;
-import com.aqua.ui.post.PostsActivity;
+import com.aqua.ui.moment.PostsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class DrawerActivity extends AppCompatActivity {
 

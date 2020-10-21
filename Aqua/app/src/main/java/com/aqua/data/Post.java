@@ -16,5 +16,16 @@ public class Post {
     private String imageUrl;
     private String postText;
 
+    public Post(String imageUrl, String postText) {
+        this.imageUrl = imageUrl;
+        this.postText = postText;
+    }
 
+    public String getPostText() {
+        return postText;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }
