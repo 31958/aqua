@@ -1,6 +1,8 @@
-package com.aqua.data;
+package com.aqua.data.moment;
 
 import android.os.AsyncTask;
+import com.aqua.data.HttpPostRequest;
+import com.aqua.data.moment.Post;
 
 import java.net.URL;
 import java.util.HashMap;

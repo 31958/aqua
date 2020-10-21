@@ -21,8 +21,8 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.aqua.R;
-import com.aqua.data.Post;
-import com.aqua.data.UploadPostTask;
+import com.aqua.data.moment.Post;
+import com.aqua.data.moment.UploadPostTask;
 
 import java.io.IOException;
 import java.io.InputStream;

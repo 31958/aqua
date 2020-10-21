@@ -1,4 +1,4 @@
-package com.aqua.data;
+package com.aqua.data.moment;
 
 public class Post {
     private int ID;
