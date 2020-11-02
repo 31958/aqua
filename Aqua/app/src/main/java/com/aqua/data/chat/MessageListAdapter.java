@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aqua.R;
-import com.aqua.data.Message;
 import com.aqua.data.oauth.LoggedInUser;
 
 import java.time.format.DateTimeFormatter;
@@ -40,7 +39,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Message message = mMessageList.get(position);
 
-        if (message.getSenderID() == LoggedInUser.user.getID()) {
+        if (message.() == LoggedInUser.user.getID()) {
             // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
@@ -99,7 +98,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         void bind(Message message) {
-            messageText.setText(message.getMessage());
+            messageText.setText(message.toString());
 
             // Format the stored timestamp into a readable String using method.
             timeText.setText(message.getDateTime().format(DateTimeFormatter.ISO_DATE));
